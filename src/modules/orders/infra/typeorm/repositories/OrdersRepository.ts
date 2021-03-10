@@ -14,7 +14,7 @@ class OrdersRepository implements IOrdersRepository {
   public async create({ customer, products }: ICreateOrderDTO): Promise<Order> {
     const order = this.ormRepository.create({
       customer,
-      orders_products: products,
+      order_products: products,
     });
 
     await this.ormRepository.save(order);
@@ -24,7 +24,7 @@ class OrdersRepository implements IOrdersRepository {
 
   public async findById(id: string): Promise<Order | undefined> {
     const order = this.ormRepository.findOne(id, {
-      relations: ['orders_products', 'customer'],
+      relations: ['order_products', 'customer'],
     });
 
     return order;
